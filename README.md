@@ -1,4 +1,4 @@
-# Arduino Client for MQTT
+# Arduino Client for MQTT with merged modifications from Tasmota
 
 This library provides a client for doing simple publish/subscribe messaging with
 a server that supports MQTT.

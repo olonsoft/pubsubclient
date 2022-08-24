@@ -23,7 +23,8 @@
 
 // MQTT_MAX_PACKET_SIZE : Maximum packet size. Override with setBufferSize().
 #ifndef MQTT_MAX_PACKET_SIZE
-#define MQTT_MAX_PACKET_SIZE 256
+//#define MQTT_MAX_PACKET_SIZE 256
+#define MQTT_MAX_PACKET_SIZE 1200     // Tasmota v8.1.0.8
 #endif
 
 // MQTT_KEEPALIVE : keepAlive interval in Seconds. Override with setKeepAlive()
@@ -108,7 +109,13 @@ private:
    //       (MQTT_MAX_HEADER_SIZE - <returned size>) bytes into the buffer
    size_t buildHeader(uint8_t header, uint8_t* buf, uint16_t length);
    IPAddress ip;
-   const char* domain;
+
+// Start Tasmota patch
+//   const char* domain;
+
+   String domain;
+// End Tasmota patch
+
    uint16_t port;
    Stream* stream;
    int _state;
@@ -147,7 +154,13 @@ public:
    boolean connect(const char* id, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage);
    boolean connect(const char* id, const char* user, const char* pass, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage);
    boolean connect(const char* id, const char* user, const char* pass, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage, boolean cleanSession);
-   void disconnect();
+
+// Start Tasmota patch
+//   void disconnect();
+
+   void disconnect(bool disconnect_package = false);
+// End Tasmota patch
+
    boolean publish(const char* topic, const char* payload);
    boolean publish(const char* topic, const char* payload, boolean retained);
    boolean publish(const char* topic, const uint8_t * payload, unsigned int plength);
